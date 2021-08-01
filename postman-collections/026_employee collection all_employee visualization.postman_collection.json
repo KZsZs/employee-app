@@ -1,0 +1,467 @@
+{
+	"info": {
+		"_postman_id": "dfed5038-14e3-4945-b6ac-bf8a52f1bbe1",
+		"name": "employee collection random name",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Job descriptions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/jobdescriptions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add job description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"job1\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"lawyer\",\r\n  \"description\": \"lawyer\",\r\n  \"addedAt\": \"2021-07-27T08:51:30.322Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Created job description",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/jobdescriptions/{{job1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						"{{job1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/employees",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"emp1\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"first_name\", \"{{random_first_name}}\");\r",
+							"pm.environment.set(\"last_name\", \"{{random_last_name}}\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"{{random_prefix}} {{first_name}} {{last_name}}\",\r\n  \"jobDescriptionId\": {{job1}},\r\n  \"firstName\": \"{{first_name}}\",\r\n  \"lastName\": \"{{last_name}}\",\r\n  \"middleName\": \"\",\r\n  \"emailId\": \"{{first_name}}{{last_name}}@gmail.com\",\r\n  \"dayOfBirth\": \"1980-07-30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/employees",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/employees",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new job description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"job2\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"cleaner\",\r\n  \"description\": \"cleaner\",\r\n  \"addedAt\": \"2021-07-27T08:51:30.322Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Newly created job description",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/jobdescriptions/{{job2}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						"{{job2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Changing job of employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"emp1\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"BobTodd\",\r\n  \"jobDescriptionId\": {{job2}},\r\n  \"firstName\": \"Bob\",\r\n  \"lastName\": \"Todd\",\r\n  \"middleName\": \"\",\r\n  \"emailId\": \"bobtodd@gmail.com\",\r\n  \"dayOfBirth\": \"1980-07-30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/employees/{{emp1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"employees",
+						"{{emp1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new job to eployee",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"BobTodd\",\r\n  \"jobDescriptionId\": {{job2}},\r\n  \"firstName\": \"Bob\",\r\n  \"lastName\": \"Todd\",\r\n  \"middleName\": \"\",\r\n  \"emailId\": \"bobtodd@gmail.com\",\r\n  \"dayOfBirth\": \"1980-07-30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/employees/{{emp1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"employees",
+						"{{emp1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check new employee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/employees/{{emp1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"employees",
+						"{{emp1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete employee",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/employees/{{emp1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"employees",
+						"{{emp1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check all employees deleted",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/employees",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "First job added",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions/{{job1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						"{{job1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Second job added",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions/{{job2}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						"{{job2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check if all job desscriptions deleted",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/jobdescriptions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
