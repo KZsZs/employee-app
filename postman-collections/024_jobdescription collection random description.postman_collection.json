@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "78549199-78cb-41cf-a334-002d006c2f8b",
+		"name": "jobdescription collection random description",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "employee app",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all jobdescriptions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/jobdescriptions/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new job painter",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Job title is painter\", function() {\r",
+							"    pm.expect(pm.response.json().title).to.eql(\"painter\")\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"painter_id\", pm.response.json().id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"painter\",\r\n  \"description\": \"{{random_description}}\",\r\n  \"addedAt\": \"2021-08-01T14:36:49.624Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new job art teacher",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Job title is art teacher\", function() {\r",
+							"    pm.expect(pm.response.json().title).to.eql(\"art teacher\")\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"art_teacher_id\", pm.response.json().id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"art teacher\",\r\n  \"description\": \"{{random_description}}\",\r\n  \"addedAt\": \"2021-08-01T14:36:49.624Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all created jobs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/jobdescriptions/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change art teacher description",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"art teacher\",\r\n  \"description\": \"{{random_description}}\",\r\n  \"addedAt\": \"2021-08-01T14:36:49.624Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions/{{art_teacher_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						"{{art_teacher_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check changed art teacher description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Art teacher description changed\", function(){\r",
+							"pm.expect(pm.response.json().description).to.eql(\"art history teacher\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/jobdescriptions/{{art_teacher_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						"{{art_teacher_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changed art teacher job",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions/{{art_teacher_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						"{{art_teacher_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "painter job",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jobdescriptions/{{painter_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jobdescriptions",
+						"{{painter_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
